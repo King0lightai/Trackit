@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Titus Project Tracker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+  <div class="onboarding-container">
+    <header>
+      <div class="logo">
+        <img src="images/icon128.png" alt="Titus Project Tracker">
+        <h1>Titus Project Tracker</h1>
+      </div>
+      <div class="subtitle">
+        Your remodeling project companion
+      </div>
+    </header>
+
+    <section class="welcome-section">
+      <h2>Welcome to Titus Project Tracker!</h2>
+      <p class="intro-text">
+        Thank you for installing our extension. Titus Project Tracker helps you organize product selections, 
+        track lead times, and manage deliveries for all your remodeling projects. 
+        Save any product while browsing with just a few clicks!
+      </p>
+    </section>
+
+    <section class="features-section">
+      <h2>Key Features</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="images/save-icon.svg" alt="Save Products Icon">
+          </div>
+          <h3>Save Products from Any Website</h3>
+          <p>Click the extension icon or right-click on any product image to save it to your projects.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="images/project-icon.svg" alt="Organize Projects Icon">
+          </div>
+          <h3>Organize by Projects</h3>
+          <p>Create and manage multiple projects, keeping all your selections organized in one place.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="images/timeline-icon.svg" alt="Timeline Icon">
+          </div>
+          <h3>Track Lead Times & Deliveries</h3>
+          <p>Never miss a delivery with our timeline view and delivery reminders.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="images/share-icon.svg" alt="Share Icon">
+          </div>
+          <h3>Share with Clients & Team</h3>
+          <p>Export your projects to share with clients and team members easily.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="getting-started-section">
+      <h2>Getting Started</h2>
+      
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Create Your First Project</h3>
+            <p>Start by creating a new project from the dashboard. Give it a name and description.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Browse & Save Products</h3>
+            <p>When you find a product you like on any website, click the extension icon to save it to your project.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Add Details & Organize</h3>
+            <p>Add lead times, expected delivery dates, and organize your products by category.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Track & Share</h3>
+            <p>Use the timeline view to track deliveries and export your project to share with others.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-project-section">
+      <h2>Demo Project</h2>
+      <p>We've created a demo project to help you get started. Check it out to see how Titus Project Tracker works!</p>
+      <button id="view-demo-btn" class="primary-btn">View Demo Project</button>
+    </section>
+
+    <section class="actions-section">
+      <button id="create-project-btn" class="primary-btn">Create Your First Project</button>
+      <button id="go-to-dashboard-btn" class="secondary-btn">Go to Dashboard</button>
+    </section>
+
+    <footer>
+      <p>Built with ❤️ by Titus Contracting Inc.</p>
+      <p class="support-link">Need help? <a href="https://tituscontracting.com/contact" target="_blank">Contact Support</a></p>
+      <div class="social-links">
+        <a href="https://facebook.com/tituscontracting" target="_blank" class="social-link">Facebook</a>
+        <a href="https://instagram.com/tituscontracting" target="_blank" class="social-link">Instagram</a>
+        <a href="https://tituscontracting.com" target="_blank" class="social-link">Website</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Create Project Modal -->
+  <div id="create-project-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Create New Project</h2>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="new-project-form">
+          <div class="form-group">
+            <label for="new-project-name">Project Name:</label>
+            <input type="text" id="new-project-name" placeholder="Enter project name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="new-project-desc">Description:</label>
+            <textarea id="new-project-desc" placeholder="Enter project description"></textarea>
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="create-btn" class="primary-btn">Create Project</button>
+        <button class="cancel-modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="onboarding.js"></script>
+</body>
+</html>

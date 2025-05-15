@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Titus Project Tracker - Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="images/icon48.png" alt="Titus Project Tracker">
+        <h1>Titus Project Tracker</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#" class="active" id="nav-dashboard">Dashboard</a></li>
+          <li><a href="#" id="nav-projects">Projects</a></li>
+          <li><a href="#" id="nav-timeline">Timeline</a></li>
+          <li><a href="#" id="nav-settings">Settings</a></li>
+        </ul>
+      </nav>
+      <div class="user-actions">
+        <button id="export-btn">Export Data</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Dashboard View -->
+    <section id="dashboard-view" class="view active">
+      <div class="dashboard-header">
+        <h2>Dashboard</h2>
+        <div class="dashboard-actions">
+          <button id="new-project-btn" class="primary-btn">+ New Project</button>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="dashboard-card summary-card">
+          <h3>Summary</h3>
+          <div class="summary-stats">
+            <div class="stat">
+              <span class="stat-value" id="total-projects">0</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="total-products">0</span>
+              <span class="stat-label">Products</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="upcoming-deliveries">0</span>
+              <span class="stat-label">Upcoming Deliveries</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-card upcoming-card">
+          <h3>Upcoming Deliveries</h3>
+          <div id="upcoming-deliveries-list" class="list-container">
+            <p class="empty-state">No upcoming deliveries found.</p>
+          </div>
+        </div>
+
+        <div class="dashboard-card recent-card">
+          <h3>Recent Activity</h3>
+          <div id="recent-activity-list" class="list-container">
+            <p class="empty-state">No recent activity found.</p>
+          </div>
+        </div>
+
+        <div class="dashboard-card projects-card">
+          <h3>Active Projects</h3>
+          <div id="active-projects-list" class="list-container">
+            <p class="empty-state">No active projects found.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects View -->
+    <section id="projects-view" class="view">
+      <div class="projects-header">
+        <h2>Projects</h2>
+        <div class="project-actions">
+          <button id="projects-new-btn" class="primary-btn">+ New Project</button>
+        </div>
+      </div>
+      
+      <div class="projects-filters">
+        <div class="search-container">
+          <input type="text" id="project-search" placeholder="Search projects...">
+        </div>
+        <div class="filter-actions">
+          <select id="project-sort">
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="date-desc">Date (Newest)</option>
+            <option value="date-asc">Date (Oldest)</option>
+          </select>
+        </div>
+      </div>
+      
+      <div id="projects-grid" class="projects-grid">
+        <!-- Projects will be loaded here -->
+      </div>
+    </section>
+
+    <!-- Timeline View -->
+    <section id="timeline-view" class="view">
+      <div class="timeline-header">
+        <h2>Delivery Timeline</h2>
+        <div class="timeline-actions">
+          <select id="timeline-project-select">
+            <option value="all">All Projects</option>
+            <!-- Project options will be loaded here -->
+          </select>
+          <select id="timeline-category-select">
+            <option value="all">All Categories</option>
+            <option value="plumbing">Plumbing</option>
+            <option value="lighting">Lighting</option>
+            <option value="flooring">Flooring</option>
+            <option value="appliances">Appliances</option>
+            <option value="hardware">Hardware</option>
+            <option value="fixtures">Fixtures</option>
+            <option value="materials">Materials</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="timeline-container">
+        <div id="timeline-month-labels" class="timeline-months">
+          <!-- Month labels will be generated here -->
+        </div>
+        <div id="timeline-grid" class="timeline-grid">
+          <!-- Timeline items will be generated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings View -->
+    <section id="settings-view" class="view">
+      <div class="settings-header">
+        <h2>Settings</h2>
+      </div>
+      
+      <div class="settings-container">
+        <div class="settings-section">
+          <h3>General Settings</h3>
+          
+          <div class="settings-group">
+            <label for="default-project">Default Project:</label>
+            <select id="default-project">
+              <option value="">Select a project</option>
+              <!-- Projects will be loaded here -->
+            </select>
+          </div>
+          
+          <div class="settings-group">
+            <label class="toggle-label">
+              <input type="checkbox" id="auto-detect-info">
+              Automatically detect product information
+            </label>
+            <p class="settings-help">Attempts to extract product details automatically when visiting product pages</p>
+          </div>
+        </div>
+        
+        <div class="settings-section">
+          <h3>Notification Settings</h3>
+          
+          <div class="settings-group">
+            <label class="toggle-label">
+              <input type="checkbox" id="delivery-reminders">
+              Enable delivery reminders
+            </label>
+          </div>
+          
+          <div class="settings-group">
+            <label for="reminder-days">Remind me this many days before delivery:</label>
+            <input type="number" id="reminder-days" min="1" max="30" value="7">
+          </div>
+        </div>
+        
+        <div class="settings-section">
+          <h3>Data Management</h3>
+          
+          <div class="settings-group settings-buttons">
+            <button id="export-data-btn">Export All Data</button>
+            <button id="import-data-btn">Import Data</button>
+            <button id="clear-data-btn" class="danger-btn">Clear All Data</button>
+          </div>
+        </div>
+        
+        <div class="settings-actions">
+          <button id="save-settings-btn" class="primary-btn">Save Settings</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal for creating new project -->
+  <div id="new-project-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Create New Project</h2>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="new-project-name">Project Name:</label>
+          <input type="text" id="new-project-name" placeholder="Enter project name">
+        </div>
+        
+        <div class="form-group">
+          <label for="new-project-desc">Description:</label>
+          <textarea id="new-project-desc" placeholder="Enter project description"></textarea>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="create-project-btn" class="primary-btn">Create Project</button>
+        <button class="cancel-modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

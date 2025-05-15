@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Titus Project Tracker</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Titus Project Tracker</h1>
+    </div>
+    
+    <div class="content">
+      <div id="product-capture" class="section">
+        <h2>Add Product to Project</h2>
+        <div class="product-preview">
+          <img id="product-image" src="images/placeholder.png" alt="Product image">
+          <div id="product-url" class="url-display"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="project-select">Project:</label>
+          <select id="project-select">
+            <option value="">Select a project</option>
+            <!-- Projects will be loaded dynamically -->
+          </select>
+          <button id="new-project-btn" class="small-btn">+ New</button>
+        </div>
+        
+        <div class="form-group">
+          <label for="category-select">Category:</label>
+          <select id="category-select">
+            <option value="">Select a category</option>
+            <option value="plumbing">Plumbing</option>
+            <option value="lighting">Lighting</option>
+            <option value="flooring">Flooring</option>
+            <option value="appliances">Appliances</option>
+            <option value="hardware">Hardware</option>
+            <option value="fixtures">Fixtures</option>
+            <option value="materials">Materials</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-name">Product Name:</label>
+          <input type="text" id="product-name">
+        </div>
+        
+        <div class="form-group">
+          <label for="product-price">Price:</label>
+          <input type="text" id="product-price">
+        </div>
+        
+        <div class="form-group">
+          <label for="product-leadtime">Lead Time (days):</label>
+          <input type="number" id="product-leadtime">
+        </div>
+        
+        <div class="form-group">
+          <label for="delivery-date">Expected Delivery:</label>
+          <input type="date" id="delivery-date">
+        </div>
+        
+        <div class="form-group">
+          <label for="product-notes">Notes:</label>
+          <textarea id="product-notes"></textarea>
+        </div>
+        
+        <div class="actions">
+          <button id="save-btn" class="primary-btn">Save Product</button>
+          <button id="cancel-btn">Cancel</button>
+        </div>
+      </div>
+      
+      <div id="project-list" class="section hidden">
+        <h2>Your Projects</h2>
+        <ul id="projects">
+          <!-- Projects will be loaded dynamically -->
+        </ul>
+        <button id="back-to-capture" class="secondary-btn">Back</button>
+        <button id="open-dashboard" class="primary-btn">Open Dashboard</button>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <button id="view-projects-btn">View Projects</button>
+      <button id="settings-btn">Settings</button>
+    </div>
+  </div>
+  
+  <div id="new-project-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Create New Project</h2>
+      <div class="form-group">
+        <label for="new-project-name">Project Name:</label>
+        <input type="text" id="new-project-name">
+      </div>
+      <div class="form-group">
+        <label for="new-project-desc">Description:</label>
+        <textarea id="new-project-desc"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button id="create-project-btn" class="primary-btn">Create</button>
+        <button id="close-modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

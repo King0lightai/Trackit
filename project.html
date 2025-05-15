@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Titus Project Tracker - Project Details</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="images/icon48.png" alt="Titus Project Tracker">
+        <h1>Titus Project Tracker</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="dashboard.html#projects-view">Projects</a></li>
+          <li><a href="dashboard.html#timeline-view">Timeline</a></li>
+        </ul>
+      </nav>
+      <div class="project-actions">
+        <button id="share-project-btn">Share Project</button>
+        <button id="project-settings-btn">Project Settings</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="project-header">
+      <div class="project-info">
+        <h1 id="project-name">Project Name</h1>
+        <p id="project-description" class="project-description">Project description loading...</p>
+        <div class="project-stats">
+          <div class="stat">
+            <span class="stat-value" id="total-products">0</span>
+            <span class="stat-label">Products</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="upcoming-deliveries">0</span>
+            <span class="stat-label">Upcoming Deliveries</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="project-created">-</span>
+            <span class="stat-label">Date Created</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-actions">
+        <button id="add-product-btn" class="primary-btn">+ Add Product</button>
+        <button id="export-project-btn">Export Project</button>
+      </div>
+    </section>
+
+    <section class="project-content">
+      <div class="project-tabs">
+        <button id="tab-all" class="tab-btn active">All Products</button>
+        <button id="tab-timeline" class="tab-btn">Timeline</button>
+        <button id="tab-categories" class="tab-btn">Categories</button>
+        <button id="tab-notes" class="tab-btn">Notes</button>
+      </div>
+
+      <div class="product-controls">
+        <div class="search-container">
+          <input type="text" id="product-search" placeholder="Search products...">
+        </div>
+        <div class="filter-controls">
+          <select id="category-filter">
+            <option value="all">All Categories</option>
+            <option value="plumbing">Plumbing</option>
+            <option value="lighting">Lighting</option>
+            <option value="flooring">Flooring</option>
+            <option value="appliances">Appliances</option>
+            <option value="hardware">Hardware</option>
+            <option value="fixtures">Fixtures</option>
+            <option value="materials">Materials</option>
+            <option value="other">Other</option>
+          </select>
+          <select id="sort-options">
+            <option value="date-added-desc">Date Added (Newest)</option>
+            <option value="date-added-asc">Date Added (Oldest)</option>
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="price-asc">Price (Low to High)</option>
+            <option value="price-desc">Price (High to Low)</option>
+            <option value="delivery-asc">Delivery Date (Soonest)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+      <div id="tab-content-all" class="tab-content active">
+        <div class="products-grid" id="products-grid">
+          <!-- Products will be loaded here -->
+          <div class="loading-indicator">
+            <div class="spinner"></div>
+            <p>Loading products...</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-timeline" class="tab-content">
+        <div class="timeline-container">
+          <div id="project-timeline">
+            <!-- Timeline will be generated here -->
+            <div class="loading-indicator">
+              <div class="spinner"></div>
+              <p>Loading timeline...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-categories" class="tab-content">
+        <div class="categories-container">
+          <div class="categories-grid" id="categories-grid">
+            <!-- Categories will be loaded here -->
+            <div class="loading-indicator">
+              <div class="spinner"></div>
+              <p>Loading categories...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-notes" class="tab-content">
+        <div class="notes-container">
+          <div class="project-notes">
+            <h3>Project Notes</h3>
+            <div class="notes-editor">
+              <textarea id="project-notes-text" placeholder="Add notes about this project..."></textarea>
+              <button id="save-notes-btn" class="primary-btn">Save Notes</button>
+            </div>
+          </div>
+          <div class="product-notes">
+            <h3>Product Notes</h3>
+            <div id="product-notes-list">
+              <!-- Product notes will be loaded here -->
+              <div class="loading-indicator">
+                <div class="spinner"></div>
+                <p>Loading notes...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Product Detail Modal -->
+  <div id="product-detail-modal" class="modal hidden">
+    <div class="modal-content product-detail-content">
+      <div class="modal-header">
+        <h2 id="modal-product-name">Product Name</h2>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="product-detail-grid">
+          <div class="product-image-container">
+            <img id="modal-product-image" src="images/placeholder.png" alt="Product image">
+            <button id="open-product-website-btn" class="secondary-btn">Visit Website</button>
+          </div>
+          
+          <div class="product-details">
+            <div class="detail-group">
+              <label>Category:</label>
+              <span id="modal-product-category">-</span>
+            </div>
+            
+            <div class="detail-group">
+              <label>Price:</label>
+              <span id="modal-product-price">-</span>
+            </div>
+            
+            <div class="detail-group">
+              <label>Lead Time:</label>
+              <span id="modal-product-leadtime">-</span>
+            </div>
+            
+            <div class="detail-group">
+              <label>Expected Delivery:</label>
+              <span id="modal-product-delivery">-</span>
+            </div>
+            
+            <div class="detail-group">
+              <label>Date Added:</label>
+              <span id="modal-product-dateadded">-</span>
+            </div>
+            
+            <div class="detail-group">
+              <label>Source:</label>
+              <span id="modal-product-source">-</span>
+            </div>
+            
+            <div class="detail-group full-width">
+              <label>Notes:</label>
+              <div id="modal-product-notes" class="notes-display">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="edit-product-btn" class="primary-btn">Edit Product</button>
+        <button id="delete-product-btn" class="danger-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Product Modal -->
+  <div id="edit-product-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="edit-modal-title">Edit Product</h2>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="edit-product-form">
+          <input type="hidden" id="edit-product-id">
+          
+          <div class="form-group">
+            <label for="edit-product-name">Product Name:</label>
+            <input type="text" id="edit-product-name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-category-select">Category:</label>
+            <select id="edit-category-select">
+              <option value="">Select a category</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="lighting">Lighting</option>
+              <option value="flooring">Flooring</option>
+              <option value="appliances">Appliances</option>
+              <option value="hardware">Hardware</option>
+              <option value="fixtures">Fixtures</option>
+              <option value="materials">Materials</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-price">Price:</label>
+            <input type="text" id="edit-product-price">
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-leadtime">Lead Time (days):</label>
+            <input type="number" id="edit-product-leadtime">
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-delivery-date">Expected Delivery:</label>
+            <input type="date" id="edit-delivery-date">
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-notes">Notes:</label>
+            <textarea id="edit-product-notes" rows="4"></textarea>
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="save-edit-btn" class="primary-btn">Save Changes</button>
+        <button class="cancel-modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Product Modal -->
+  <div id="add-product-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add New Product</h2>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="add-product-form">
+          <div class="form-group">
+            <label for="add-product-name">Product Name:</label>
+            <input type="text" id="add-product-name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="add-product-url">Product URL:</label>
+            <input type="url" id="add-product-url" placeholder="https://">
+          </div>
+          
+          <div class="form-group">
+            <label for="add-product-image">Product Image:</label>
+            <div class="image-upload">
+              <div id="image-preview">
+                <img id="preview-image" src="images/placeholder.png" alt="Product image preview">
+              </div>
+              <div class="upload-controls">
+                <input type="file" id="add-product-image" accept="image/*">
+                <div class="upload-buttons">
+                  <button type="button" id="select-image-btn" class="secondary-btn">Select Image</button>
+                  <span class="or-divider">or</span>
+                  <button type="button" id="paste-image-btn" class="secondary-btn">Paste URL</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="add-category-select">Category:</label>
+            <select id="add-category-select">
+              <option value="">Select a category</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="lighting">Lighting</option>
+              <option value="flooring">Flooring</option>
+              <option value="appliances">Appliances</option>
+              <option value="hardware">Hardware</option>
+              <option value="fixtures">Fixtures</option>
+              <option value="materials">Materials</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="add-product-price">Price:</label>
+            <input type="text" id="add-product-price">
+          </div>
+          
+          <div class="form-group">
+            <label for="add-product-leadtime">Lead Time (days):</label>
+            <input type="number" id="add-product-leadtime">
+          </div>
+          
+          <div class="form-group">
+            <label for="add-delivery-date">Expected Delivery:</label>
+            <input type="date" id="add-delivery-date">
+          </div>
+          
+          <div class="form-group">
+            <label for="add-product-notes">Notes:</label>
+            <textarea id="add-product-notes" rows="4"></textarea>
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="save-add-btn" class="primary-btn">Add Product</button>
+        <button class="cancel-modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Settings Modal -->
+  <div id="project-settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Project Settings</h2>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="project-settings-form">
+          <div class="form-group">
+            <label for="edit-project-name">Project Name:</label>
+            <input type="text" id="edit-project-name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-project-desc">Description:</label>
+            <textarea id="edit-project-desc" rows="4"></textarea>
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="save-project-settings-btn" class="primary-btn">Save Changes</button>
+        <button id="delete-project-btn" class="danger-btn">Delete Project</button>
+        <button class="cancel-modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share Project Modal -->
+  <div id="share-project-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Share Project</h2>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="share-options">
+          <div class="share-option">
+            <h3>Export as PDF</h3>
+            <p>Create a PDF of this project to share with clients or team members.</p>
+            <button id="export-pdf-btn" class="secondary-btn">Export PDF</button>
+          </div>
+          
+          <div class="share-option">
+            <h3>Export as JSON</h3>
+            <p>Export project data to import into another Titus Project Tracker.</p>
+            <button id="export-json-btn" class="secondary-btn">Export JSON</button>
+          </div>
+          
+          <div class="share-option">
+            <h3>Share via Link</h3>
+            <p>Generate a shareable link for this project (requires Titus Project Tracker Cloud).</p>
+            <div class="share-link-container">
+              <p class="upgrade-note">Requires Titus Project Tracker Cloud subscription</p>
+              <button id="upgrade-btn" class="primary-btn">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="cancel-modal-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="project.js"></script>
+</body>
+</html>

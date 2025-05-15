@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Save Product to Project</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="save-product.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Save Product to Project</h1>
+    </div>
+    
+    <div class="content">
+      <div id="product-capture" class="section">
+        <div class="product-preview">
+          <img id="product-image" src="images/placeholder.png" alt="Product image">
+          <div id="product-url" class="url-display"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="project-select">Project:</label>
+          <select id="project-select">
+            <option value="">Select a project</option>
+            <!-- Projects will be loaded dynamically -->
+          </select>
+          <button id="new-project-btn" class="small-btn">+ New</button>
+        </div>
+        
+        <div class="form-group">
+          <label for="category-select">Category:</label>
+          <select id="category-select">
+            <option value="">Select a category</option>
+            <option value="plumbing">Plumbing</option>
+            <option value="lighting">Lighting</option>
+            <option value="flooring">Flooring</option>
+            <option value="appliances">Appliances</option>
+            <option value="hardware">Hardware</option>
+            <option value="fixtures">Fixtures</option>
+            <option value="materials">Materials</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-name">Product Name:</label>
+          <input type="text" id="product-name">
+        </div>
+        
+        <div class="form-group">
+          <label for="product-price">Price:</label>
+          <input type="text" id="product-price">
+        </div>
+        
+        <div class="form-group">
+          <label for="product-leadtime">Lead Time (days):</label>
+          <input type="number" id="product-leadtime">
+        </div>
+        
+        <div class="form-group">
+          <label for="delivery-date">Expected Delivery:</label>
+          <input type="date" id="delivery-date">
+        </div>
+        
+        <div class="form-group">
+          <label for="product-notes">Notes:</label>
+          <textarea id="product-notes"></textarea>
+        </div>
+        
+        <div class="actions">
+          <button id="save-btn" class="primary-btn">Save Product</button>
+          <button id="cancel-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- New Project Modal -->
+  <div id="new-project-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Create New Project</h2>
+      <div class="form-group">
+        <label for="new-project-name">Project Name:</label>
+        <input type="text" id="new-project-name">
+      </div>
+      <div class="form-group">
+        <label for="new-project-desc">Description:</label>
+        <textarea id="new-project-desc"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button id="create-project-btn" class="primary-btn">Create</button>
+        <button id="close-modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="save-product.js"></script>
+</body>
+</html>
